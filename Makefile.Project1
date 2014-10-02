@@ -1,4 +1,0 @@
-#project name
-PROJECT_NAME := Project1
-
-include common.mk
