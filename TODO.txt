@@ -1,0 +1,9 @@
+* add a separate Config.in per project (needs buildroot changes or script to generate Config.in)
+* add a separate overlay per project (needs buildroot changes)
+* add a README.md
+* we save .gitmodules but apparently can't reinit submodules out of it... weird.
+* add a hook at subproject initialisation 
+ * create overlay dirs
+ * register to config.mk ?
+* on next release : adding documentation to readme.md
+* documentation making variant specific config.in
