@@ -1,0 +1,5 @@
+*/.ignore export-ignore
+buildroot export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+.gitmodules export-ignore
