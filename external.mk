@@ -1,1 +1,1 @@
-# Makefiles used by all subpojects
+# Makefiles used by all subprojects
