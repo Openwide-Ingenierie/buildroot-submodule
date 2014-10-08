@@ -1,4 +1,4 @@
-# make the variant name available as a Config.in variableœ
+# make the variant name available as a Config.in variable
 #
 # you can use BR2SM_PROJECT_NAME to have some options only appear for some variants
 #
