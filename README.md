@@ -88,7 +88,7 @@ The idea is to make two variants of the same project, one to build the toolchain
 * make the toolchain with `make -f Makefile.toolchain toolchain`
 * configure your main project to use the built toolchain
  * change the toolchain type to _external toolchain_
- * set the toolchain location to _$(BR2_EXTERNAL)/toolchain/output/host_
+ * set the toolchain location to _$(BR2_EXTERNAL)/toolchain/output/host/usr_
  * set all toolchain options to reflect what you have set in your toolchain project
 * check that the configuration is correct : `make toolchain`
 
@@ -172,3 +172,25 @@ Usually, you want to customize your target filesystem by ovelaying files as desc
 * set the script to run in the menuconfig option _system configuration => script to run before generating images_ (use $(BR2_EXTERNAL) to have a path relative to your toplevel project directory)
 * add the script at the proper place
 
+### Adding your own documentation to a buildroot-submodule project
+
+Buildroot has a very complete infrastructure to generate documentation based on _asciidoc_ This infrastructure can easily be reused to create your own documents. As per usual, please refer to the buildroot documentation for all the details. Here is a quick run-through
+
+* create a directory named after the document you want to create
+* add a _.mk_ file in that directory with the same name as the directory.
+* include the new makefile in _external.mk_
+* add the source of your document ( _asciidoc_ text files) to the directory
+* add the following in the _.mk_ file (with _foo_ replaced with the name of your document)
+
+```
+################################################################################
+#
+# foo-document
+#
+################################################################################
+
+FOO_SOURCES = $(sort $(wildcard $(BR2_EXTERNAL)/foo/*))
+$(eval $(call asciidoc-document))
+```
+
+* run _make foo_
