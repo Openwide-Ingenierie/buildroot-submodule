@@ -124,8 +124,8 @@ This is the recommended way to add custom configuration files to the target
 If one of the packages provided by buildroot has a bug and you find a patch fixing the bug that hasn't been commited upstream (or that is only available in unreleased builds), you will want to have buildroot apply the patch automatically:
 
 * Find the exact name of the package. That is the name of the directory in _buildroot/package/_
-* Create a directory _patch/< package >/< version >_
-* put your patch in it with the following naming convention : _< package >.< number >.< description >.patch_ where the number will be used to determine the order in whitch patches are applied
+* Create a directory _patch/< package >/_
+* put your patch in it with the following naming convention : _< package >-< number >-< description >.patch_ where the number will be used to determine the order in whitch patches are applied
 
 This is the recommanded way to integrate external patches. You should always consider the upstream status of patches and if upstreaming is possible.
 
