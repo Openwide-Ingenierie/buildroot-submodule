@@ -151,12 +151,16 @@ Note that buildroot will usually fetch sources from version control servers, but
 
 ### Compiling your own sources for a package provided by buildroot
 
-If you need to modify the source code of a package provided by buildroot it is handy to have buildroot use a local uncompressed copy of the sources instead of fetching from the internet.
+If you need to modify the source code of a package provided by buildroot it is handy to have buildroot use a local, uncompressed copy of the sources instead of fetching from the internet.
 
 This only applies for packages that are managed by buildroot proper. If the package is a custom package, you probably want to set the fetch method to _local_ instead.
 
 * if the package is using git, clone the source you want to modify as a submodule (to guarantee source consistancy) 
-* if not copy/checkout the source locally
+  * Clone the package itself
+  * Checkout the exact version used by buildroot
+  * Create a branch for your local changes
+  * Apply any patches that Buildroot will usually apply using _git am_
+* if not copy/checkout the source locally and use another tool to follow apply buildroot patches (_quilt_ can probably do that)
 * add the following line to the file _local.mk_
 
 ``` 
@@ -165,6 +169,8 @@ This only applies for packages that are managed by buildroot proper. If the pack
    The variable _$(BR2_EXTERNAL)_ will expand to the toplevel directory of your project. Note that _packagename_ should be all cap here.
    
 Buildroot will use these source instead of the version recommande by its own configuration but will still use its internal knowledge of the package to compile it.
+
+Once your changes are ready you can regenerate the patch serie, including the patches Buildroot already integrates using _git format patch_
 
 ### Customizing the final filesystem
 Usually, you want to customize your target filesystem by ovelaying files as described above in this document. But in some case it is not possible to use static files and running a shell script on the generated filesystem can be very handy.
