@@ -163,11 +163,11 @@ This only applies for packages that are managed by buildroot proper. If the pack
 * if not copy/checkout the source locally and use another tool to follow apply buildroot patches (_quilt_ can probably do that)
 * add the following line to the file _local.mk_
 
-``` 
- <packagename>_OVERRIDE_SRC_DIR=$(BR2_EXTERNAL)/path/to/source
+```
+ <packagename>_OVERRIDE_SRCDIR=$(BR2_EXTERNAL)/path/to/source
 ```
    The variable _$(BR2_EXTERNAL)_ will expand to the toplevel directory of your project. Note that _packagename_ should be all cap here.
-   
+
 Buildroot will use these source instead of the version recommande by its own configuration but will still use its internal knowledge of the package to compile it.
 
 Once your changes are ready you can regenerate the patch serie, including the patches Buildroot already integrates using _git format patch_
