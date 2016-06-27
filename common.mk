@@ -56,13 +56,15 @@ savedefconfig:
 
 # generate from a defconfig then save as current configuration
 %_defconfig:
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $@ savedefconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $@
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) savedefconfig
 	$(call UPDATE_DEFCONFIG)
 
 
 # update from current configuration, run the command, then save the result
 $(config_change_targets): $(DEFCONFIG_FILE)
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig $@ savedefconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig $@
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) savedefconfig
 
 _all:
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $(all)
@@ -83,7 +85,8 @@ define UPDATE_DEFCONFIG
 	echo 'BR2_ROOTFS_OVERLAY="$$(BR2_EXTERNAL)/overlay"' >> $(DEFCONFIG_FILE)
 	echo 'BR2_PACKAGE_OVERRIDE_FILE="$$(BR2_EXTERNAL)/local.mk"' >> $(DEFCONFIG_FILE)
 	echo 'BR2_GLOBAL_PATCH_DIR="$$(BR2_EXTERNAL)/patch"' >> $(DEFCONFIG_FILE)
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig savedefconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) savedefconfig
 endef
 
 
