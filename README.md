@@ -16,14 +16,15 @@ If your project has no variants (you target only a single type of hardware), sta
 * uncompress it in the subdirectory you want to work in
 * run `git init` to initialize your new git repository
 * run `git add common.mk Config.in external.mk Makefile LICENSE`
-* run `git submodule add git://git.buildroot.net/buildroot buildroot>` to clone buildroot in the proper subdirectory.
+* run `git submodule add git://git.buildroot.net/buildroot buildroot` to clone buildroot in the proper subdirectory.
 * If you want to use a specific version of buildroot run the following commands:
 ```
 cd buildroot
 git checkout <version tag>
 cd ..
+git add buildroot
 ```
-* run `git add .gitmodules buildroot`
+* run `git commit`
 
 You now have an infrastructure that allows you to work on a project based on buildroot but that allows you to keep your changes cleanly separated from changes to buildroot itself.
 
@@ -44,6 +45,8 @@ All these mechanism are standard buildroot features that have been properly conf
 
 It is possible to have multiple projects built in the same directory using buildroot-submodule.
 * copy the file _Makefile_ to a new name (like _Makefile.Project1_) 
+* create a directory for your subproject (will contain _defconfig_ and _output_)
+* update the PROJECT_NAME variable to that directory (in `<new makefile>`)
 * run `make -f <new makefile> <target>` to run make on that target
 
 By default, variants will share
