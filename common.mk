@@ -18,7 +18,7 @@ MAKEARGS := -C $(CURDIR)/buildroot
 #location to store build files
 MAKEARGS += O=$(CURDIR)/$(PROJECT_NAME)/output
 # location to store extra config options and buildroot packages
-MAKEARGS += BR2_EXTERNAL=$(CURDIR)
+MAKEARGS += BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH=$(CURDIR)
 #transmit project name to be able to use it in kconfig
 MAKEARGS += PROJECT_NAME=$(PROJECT_NAME)
 # location of default defconfig
@@ -81,10 +81,10 @@ $(DEFCONFIG_FILE):
 	$(call UPDATE_DEFCONFIG)
 
 define UPDATE_DEFCONFIG
-	echo 'BR2_DL_DIR="$$(BR2_EXTERNAL)/dl"' >> $(DEFCONFIG_FILE)
-	echo 'BR2_ROOTFS_OVERLAY="$$(BR2_EXTERNAL)/overlay"' >> $(DEFCONFIG_FILE)
-	echo 'BR2_PACKAGE_OVERRIDE_FILE="$$(BR2_EXTERNAL)/local.mk"' >> $(DEFCONFIG_FILE)
-	echo 'BR2_GLOBAL_PATCH_DIR="$$(BR2_EXTERNAL)/patch"' >> $(DEFCONFIG_FILE)
+	echo 'BR2_DL_DIR="$$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/dl"' >> $(DEFCONFIG_FILE)
+	echo 'BR2_ROOTFS_OVERLAY="$$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/overlay"' >> $(DEFCONFIG_FILE)
+	echo 'BR2_PACKAGE_OVERRIDE_FILE="$$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/local.mk"' >> $(DEFCONFIG_FILE)
+	echo 'BR2_GLOBAL_PATCH_DIR="$$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/patch"' >> $(DEFCONFIG_FILE)
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) savedefconfig
 endef
