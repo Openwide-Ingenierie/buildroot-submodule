@@ -84,18 +84,34 @@ The idea is to make two variants of the same project, one to build the toolchain
 
 * Create a new _Makefile_ for the variant `cp Makefile Makefile.toolchain`
 * Edit the new file to rename the project to _toolchain_
-* Configure the new subproject properly with `make -f Makefile.toolchain menuconfig` 
- * Configure the toolchain itself according to your need
- * deactivate the linux kernel option
- * set init system to _None_ and deactivate busybox
+* Configure the new subproject properly with `make -f Makefile.toolchain menuconfig`
+  * Configure the toolchain itself according to your need
+  * deactivate the linux kernel option
+  * set init system to _None_ and deactivate busybox
 * make the toolchain with `make -f Makefile.toolchain toolchain`
 * configure your main project to use the built toolchain
- * change the toolchain type to _external toolchain_
- * set the toolchain location to _$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/toolchain/output/host/usr_
- * set all toolchain options to reflect what you have set in your toolchain project
+  * change the toolchain type to _external toolchain_
+  * set the toolchain location to _$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/toolchain/output/host/usr_
+  * set all toolchain options to reflect what you have set in your toolchain project
 * check that the configuration is correct : `make toolchain`
 
 you can now build your normal project and _make clean_ won't erase the compiler entirely
+
+## Adding gdb to the toolchain built separately
+The configuration decribed above does not include GDB in the toolchain, if you need it, follow the extra steps bellow (it can be done direcly).
+* Update the configuration of the toolchain subproject with `make -f Makefile.toolchain menuconfig`
+  * disable all rootfs specific tasks:
+    * disable root login with password
+    * set /bin/sh to none
+    * disable Run a getty (login prompt) after boot
+    * disable remount root filesystem read-write during boot
+    * disable all Filesystem images options (tar, ext, cpio...)
+  * select build cross gdb for the host and the options you need
+  * add the gdb + gdb-server package (from Target packages > Debugging, profiling and benchmark as for buildroot this is part of your rootfs, but here it's a very minimal one)
+* make the toolchain with `make -f Makefile.toolchain` (note the full build: you need to build the gdb-serveur target package)
+* update the configuration of your main project
+  * select Copy gdb server to the Target
+* check that the configuration is correct : `make toolchain`
 
 ## Some notes on configuration management
 One of the design goals of buildroot-submodule is to keep buildroot's _absolutely rebuildable_ philosophy. 
