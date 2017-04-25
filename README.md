@@ -91,7 +91,7 @@ The idea is to make two variants of the same project, one to build the toolchain
 * make the toolchain with `make -f Makefile.toolchain toolchain`
 * configure your main project to use the built toolchain
  * change the toolchain type to _external toolchain_
- * set the toolchain location to _$(BR2_EXTERNAL)/toolchain/output/host/usr_
+ * set the toolchain location to _$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/toolchain/output/host/usr_
  * set all toolchain options to reflect what you have set in your toolchain project
 * check that the configuration is correct : `make toolchain`
 
@@ -167,9 +167,9 @@ This only applies for packages that are managed by buildroot proper. If the pack
 * add the following line to the file _local.mk_
 
 ```
- <packagename>_OVERRIDE_SRCDIR=$(BR2_EXTERNAL)/path/to/source
+ <packagename>_OVERRIDE_SRCDIR=$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/path/to/source
 ```
-   The variable _$(BR2_EXTERNAL)_ will expand to the toplevel directory of your project. Note that _packagename_ should be all cap here.
+   The variable _$(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)_ will expand to the toplevel directory of your project. Note that _packagename_ should be all cap here.
 
 Buildroot will use these source instead of the version recommande by its own configuration but will still use its internal knowledge of the package to compile it.
 
@@ -178,7 +178,7 @@ Once your changes are ready you can regenerate the patch serie, including the pa
 ### Customizing the final filesystem
 Usually, you want to customize your target filesystem by ovelaying files as described above in this document. But in some case it is not possible to use static files and running a shell script on the generated filesystem can be very handy.
 
-* set the script to run in the menuconfig option _system configuration => script to run before generating images_ (use $(BR2_EXTERNAL) to have a path relative to your toplevel project directory)
+* set the script to run in the menuconfig option _system configuration => script to run before generating images_ (use $(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH) to have a path relative to your toplevel project directory)
 * add the script at the proper place
 
 ### Adding your own documentation to a buildroot-submodule project
@@ -198,7 +198,7 @@ Buildroot has a very complete infrastructure to generate documentation based on 
 #
 ################################################################################
 
-FOO_SOURCES = $(sort $(wildcard $(BR2_EXTERNAL)/foo/*))
+FOO_SOURCES = $(sort $(wildcard $(BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH)/foo/*))
 $(eval $(call asciidoc-document))
 ```
 
