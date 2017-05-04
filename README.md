@@ -108,7 +108,7 @@ The configuration decribed above does not include GDB in the toolchain, if you n
     * disable all Filesystem images options (tar, ext, cpio...)
   * select build cross gdb for the host and the options you need
   * add the gdb + gdb-server package (from Target packages > Debugging, profiling and benchmark as for buildroot this is part of your rootfs, but here it's a very minimal one)
-* make the toolchain with `make -f Makefile.toolchain` (note the full build: you need to build the gdb-serveur target package)
+* make the toolchain with `make -f Makefile.toolchain` (note the full build: you need to build the gdb-server target package)
 * update the configuration of your main project
   * select Copy gdb server to the Target
 * check that the configuration is correct : `make toolchain`
