@@ -18,7 +18,7 @@ MAKEARGS := -C $(CURDIR)/buildroot
 #location to store build files
 MAKEARGS += O=$(CURDIR)/$(PROJECT_NAME)/output
 # location to store extra config options and buildroot packages
-MAKEARGS += BR2_EXTERNAL_BUILDROOT_SUBMODULE_PATH=$(CURDIR)
+MAKEARGS += BR2_EXTERNAL=$(CURDIR)
 #transmit project name to be able to use it in kconfig
 MAKEARGS += PROJECT_NAME=$(PROJECT_NAME)
 # location of default defconfig
