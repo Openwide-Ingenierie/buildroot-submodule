@@ -34,7 +34,7 @@ You now have an infrastructure that allows you to work on a project based on bui
 * Your configuration will be saved in a toplevel _defconfig_ file that you can manage with git
 * Any change that is meant to be upstreamed can be done in the _buildroot_ submodule
 * You can add files to overlay in an _overlay_ subdirectory
-* You can add patches (following the buildroot naming convention) in the _patch_subdirectory
+* You can add patches (following the buildroot naming convention) in the _patch_ subdirectory
 * You can override the source for a specific package by setting an override in _local.mk_
 
 
@@ -54,7 +54,7 @@ By default, variants will share
 * The _buildroot_ directory (infrastructure and versions to use)
 * The _Config.in_ file (extra configuration options for menuconfig)
 * The _external.mk_ file (extra make targets and instructions)
-* The _local.mk_ file (defining OVERRIDE_SRC_DIR variables)
+* The _local.mk_ file (defining OVERRIDE_SRCDIR variables)
 * The _patch_ directory (patches to be applied by buildroot before build)
 * The _overlay_ directory (files to be added to the target filesystem after everything is built)
 
